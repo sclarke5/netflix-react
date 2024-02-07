@@ -1,0 +1,22 @@
+{
+  "name": "Chrome React Netflix Extension",
+  "description": "The power of React and TypeScript for building interactive Chrome extensions",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+      "default_popup": "index.html",
+      "default_title": "Open the popup"
+  },
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": ["https://www.netflix.com/*"]
+    }
+  ],
+  "icons": {
+    "16": "netflix-logo.png",
+    "32": "netflix-logo.png",
+    "48": "netflix-logo.png",
+    "128": "netflix-logo.png"
+  }
+}
