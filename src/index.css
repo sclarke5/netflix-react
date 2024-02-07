@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -52,6 +56,31 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+#crx-root {
+  background-color: black;
+  padding: 4rem;
+  position: fixed;
+  top: 0rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 100%;
+}
+
+.toggleButton {
+  z-index: 999;
+  position: absolute;
+  top: 10rem;
+  right: 2rem;
+}
+
+.controlPanel {
+  min-height: 30rem;
+}
+
+#appMountPoint {
+  width: 100%;
 }
 
 @media (prefers-color-scheme: light) {

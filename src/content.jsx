@@ -1,23 +1,32 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App'
+import AppDrawer from './AppDrawer'
 
-const root = document.createElement('div')
-root.id = 'crx-root'
-document.body.append(root)
+const bringContinueWatchingToTop = () => {
+  const continueWatching = document.querySelector('[data-list-context="continueWatching"]');
+  const hero = document.querySelector(".volatile-billboard-animations-container");
 
-const continueWatching = document.querySelector('[data-list-context="continueWatching"]');
-const hero = document.querySelector(".volatile-billboard-animations-container");
-
-if(hero) {
-  hero.appendChild(continueWatching);
+  if(hero) {
+    hero.appendChild(continueWatching);
+  }
 }
 
+const root = document.createElement("div");
+root.id = "crx-root";
+document.body.appendChild(root);
 
-ReactDOM.render(
+window.addEventListener('testEvent', (e) => {
+  console.log('in content: ', e.detail)
+  switch(e.detail) {
+    case 'pullUpContinueWatching':
+      bringContinueWatchingToTop();
+  }
+})
+
+
+ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  root,
-)
+    <AppDrawer />
+  </React.StrictMode>
+);

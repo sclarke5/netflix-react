@@ -11,6 +11,7 @@ function App() {
     })
 
     console.log('inside fire ', event)
+    console.log('again', chrome.runtime)
 
     window.dispatchEvent(event);
   }
