@@ -5,13 +5,16 @@
   "manifest_version": 3,
   "action": {
       "default_popup": "index.html",
-      "default_title": "Open the popup"
+      "default_title": "Launch the popup"
   },
   "content_scripts": [
     {
-      "js": ["content.js"],
+      "js": ["src/content.jsx"],
       "matches": ["https://www.netflix.com/*"]
     }
+  ],
+  "permissions": [
+    "activeTab"
   ],
   "icons": {
     "16": "netflix-logo.png",
