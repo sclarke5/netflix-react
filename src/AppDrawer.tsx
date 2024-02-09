@@ -1,34 +1,41 @@
-import { useState } from 'react'
 import './App.css'
 
 const AppDrawer = () => {
-  const [show, setShow] = useState(true);
-
-  const fireEvent = () => {
-    const event = new CustomEvent("testEvent", {
-      detail: 'pullUpContinueWatching'
-    })
-
-    window.dispatchEvent(event);
+  const firePullUpEvent = (type: string) => {
+    (async () => {
+      const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
+      //@ts-ignore
+      const response = await chrome.tabs.sendMessage(tab.id, {
+        name: 'pullUpEvent',
+        type
+      });
+    })();
   }
 
-  const toggleControls = () => {
-    setShow(!show);
+  const fireFilterEvent = (type: string) => {
+    (async () => {
+      const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
+      //@ts-ignore
+      const response = await chrome.tabs.sendMessage(tab.id, {
+        name: 'filterEvent',
+        type
+      });
+    })();
   }
 
   return (
-    <div className=''>
-      <div className='toggleButton'>
-        <button onClick={toggleControls}>Toggle Controls</button>
-      </div>
-
-      {show && (
-        <div className='controlPanel flex flex-col items-center justify-center'>
-          <h2 className='text-3xl mb-6'>Rearrange Netflix's Shitty UI</h2>
-          <button className="p-4" onClick={fireEvent}>Pull Up Continue Watching</button>
+    <div className='controlPanel flex flex-col items-center'>
+      <h2 className='font-black text-2xl my-6'>Override Netflix's Shitty UI</h2>
+      <div className='grid grid-cols-2 w-full'>
+        <div className='flex flex-col items-center'>
+          <h3 className='font-bold text-lg text-center'>Rearrange Content</h3>
+          <button className="text-md my-4" onClick={() => firePullUpEvent('continue-watching')}>Pull Up Continue Watching</button>
         </div>
-      )}
-
+        <div className='flex flex-col items-center'>
+          <h3 className='font-bold text-lg text-center'>Filter Content</h3>
+          <button className="text-md my-4" onClick={() => fireFilterEvent('filterOutNetflix')}>Filter Out Netflix Content</button>
+        </div>
+      </div>
     </div>
   )
 }
